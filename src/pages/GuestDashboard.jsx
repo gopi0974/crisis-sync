@@ -2,10 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { db } from '../firebase/config';
 import { ref, onValue, query, limitToLast } from 'firebase/database';
 import { useAppContext } from '../context/AppContext';
-import { ShieldCheck, AlertCircle } from 'lucide-react';
+import { ShieldCheck, AlertCircle, LogOut } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function GuestDashboard() {
-  const { user } = useAppContext();
+  const { user, setUser } = useAppContext();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    setUser(null);
+    navigate('/');
+  };
   const [myCrises, setMyCrises] = useState([]);
   const [myServices, setMyServices] = useState([]);
   const [buildingHasActiveCrisis, setBuildingHasActiveCrisis] = useState(false);
@@ -93,7 +100,14 @@ export default function GuestDashboard() {
 
   return (
     <div className="min-h-screen bg-dark-bg text-white p-4 max-w-lg md:max-w-6xl mx-auto pb-24">
-      <header className="bg-card-bg p-6 rounded-2xl border border-card-border shadow-lg mb-8 text-center mt-4">
+      <header className="bg-card-bg p-6 rounded-2xl border border-card-border shadow-lg mb-8 text-center mt-4 relative">
+        <button 
+          onClick={handleLogout}
+          className="absolute top-4 right-4 text-text-secondary hover:text-white transition p-2 bg-dark-bg rounded-full border border-card-border"
+          title="Log Out"
+        >
+          <LogOut size={18} />
+        </button>
         <h1 className="text-2xl font-bold mb-1">Welcome, {user.name}</h1>
         <p className="text-text-secondary text-sm">Room {user.roomNumber} • {user.buildingId}</p>
         

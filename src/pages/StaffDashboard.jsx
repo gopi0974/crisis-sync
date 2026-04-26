@@ -2,12 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { db } from '../firebase/config';
 import { ref, onValue, runTransaction, serverTimestamp } from 'firebase/database';
 import { useAppContext } from '../context/AppContext';
-import { Phone, Clock, AlertTriangle, CheckCircle, MapPin } from 'lucide-react';
+import { Phone, Clock, AlertTriangle, CheckCircle, MapPin, LogOut } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 export default function StaffDashboard() {
-  const { user } = useAppContext();
+  const { user, setUser } = useAppContext();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    setUser(null);
+    navigate('/');
+  };
   const [crises, setCrises] = useState([]);
   const [services, setServices] = useState([]);
   const [onlineStatus, setOnlineStatus] = useState(user?.status === 'available' || true);
@@ -156,6 +163,13 @@ export default function StaffDashboard() {
           >
             <div className={`w-3 h-3 rounded-full ${onlineStatus ? 'bg-success animate-pulse' : 'bg-text-secondary'}`}></div>
             {onlineStatus ? 'Status: Active' : 'Status: Inactive'}
+          </button>
+          <button 
+            onClick={handleLogout} 
+            className="p-2 text-text-secondary hover:text-white bg-dark-bg rounded-full border border-card-border transition"
+            title="Log Out"
+          >
+            <LogOut size={18} />
           </button>
         </div>
       </header>
