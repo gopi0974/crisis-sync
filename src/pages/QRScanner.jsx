@@ -85,6 +85,16 @@ export default function QRScanner() {
     startScanning(cameras[nextIndex].id);
   };
 
+  const [showManualInput, setShowManualInput] = useState(false);
+  const [manualCode, setManualCode] = useState('');
+
+  const handleManualSubmit = (e) => {
+    e.preventDefault();
+    if (manualCode.trim()) {
+      navigate(`/onboarding/${manualCode.trim().toUpperCase()}`);
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-dark-bg">
       <div className="max-w-md w-full bg-card-bg p-8 rounded-xl border border-card-border shadow-2xl text-center relative overflow-hidden">
@@ -118,12 +128,41 @@ export default function QRScanner() {
         </div>
 
         <div className="mt-8 pt-6 border-t border-card-border">
-          <button 
-            onClick={() => navigate(`/onboarding/${DEFAULT_BUILDING_ID}`)}
-            className="w-full border border-card-border hover:bg-card-border text-white py-3 rounded-lg font-semibold transition"
-          >
-            Enter Manually
-          </button>
+          {!showManualInput ? (
+            <button 
+              onClick={() => setShowManualInput(true)}
+              className="w-full border border-card-border hover:bg-card-border text-white py-3 rounded-lg font-semibold transition"
+            >
+              Enter Manually
+            </button>
+          ) : (
+            <form onSubmit={handleManualSubmit} className="space-y-3 animate-in fade-in slide-in-from-top-2 duration-300">
+              <input 
+                type="text"
+                placeholder="Enter Unique Building ID"
+                value={manualCode}
+                onChange={(e) => setManualCode(e.target.value)}
+                className="w-full bg-black border border-card-border rounded-lg px-4 py-3 text-white focus:outline-none focus:border-alert-red transition placeholder:text-gray-600"
+                autoFocus
+              />
+              <div className="flex gap-2">
+                <button 
+                  type="button"
+                  onClick={() => setShowManualInput(false)}
+                  className="flex-1 border border-card-border text-text-secondary py-2 rounded-lg text-sm hover:bg-white/5 transition"
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit"
+                  disabled={!manualCode.trim()}
+                  className="flex-[2] bg-alert-red disabled:opacity-50 disabled:cursor-not-allowed text-white py-2 rounded-lg font-bold hover:bg-red-600 transition"
+                >
+                  Access Building
+                </button>
+              </div>
+            </form>
+          )}
         </div>
       </div>
     </div>
