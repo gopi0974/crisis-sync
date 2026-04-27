@@ -105,16 +105,21 @@ export default function QRScanner() {
          return;
       }
 
-      // Query admins node for the buildingId
+      // Fetch all admins and verify manually to avoid database index issues
       const adminsRef = ref(db, 'admins');
-      const q = query(adminsRef, orderByChild('buildingId'), equalTo(code));
-      const snapshot = await get(q);
+      const snapshot = await get(adminsRef);
       
+      let found = false;
       if (snapshot.exists()) {
+        const adminsData = snapshot.val();
+        found = Object.values(adminsData).some(admin => admin.buildingId === code);
+      }
+      
+      if (found) {
         navigate(`/onboarding/${code}`);
       } else {
         const toast = (await import('react-hot-toast')).default;
-        toast.error("Invalid Building ID. Please check and try again.");
+        toast.error("Building ID not found. Please check and try again.");
       }
     } catch (err) {
       console.error("Verification failed", err);
