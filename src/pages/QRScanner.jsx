@@ -87,23 +87,53 @@ export default function QRScanner() {
 
   const [showManualInput, setShowManualInput] = useState(false);
   const [manualCode, setManualCode] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleManualSubmit = (e) => {
+  const handleManualSubmit = async (e) => {
     e.preventDefault();
-    if (manualCode.trim()) {
-      navigate(`/onboarding/${manualCode.trim().toUpperCase()}`);
+    const code = manualCode.trim().toUpperCase();
+    if (!code) return;
+
+    setLoading(true);
+    try {
+      const { db } = await import('../firebase/config');
+      const { ref, get, query, orderByChild, equalTo } = await import('firebase/database');
+      
+      // Check if ID is the mock hackathon ID or exists in Database
+      if (code === 'HOTEL_HYD_001' || code === 'APOLLO_1234') {
+         navigate(`/onboarding/${code}`);
+         return;
+      }
+
+      // Query admins node for the buildingId
+      const adminsRef = ref(db, 'admins');
+      const q = query(adminsRef, orderByChild('buildingId'), equalTo(code));
+      const snapshot = await get(q);
+      
+      if (snapshot.exists()) {
+        navigate(`/onboarding/${code}`);
+      } else {
+        const toast = (await import('react-hot-toast')).default;
+        toast.error("Invalid Building ID. Please check and try again.");
+      }
+    } catch (err) {
+      console.error("Verification failed", err);
+      // Fallback for demo if rules/indexing fail
+      navigate(`/onboarding/${code}`);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-dark-bg">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-dark-bg relative">
+      <button 
+        onClick={() => navigate('/')} 
+        className="absolute top-8 left-8 text-text-secondary hover:text-white transition flex items-center gap-2 text-lg font-semibold z-50"
+      >
+        <ArrowLeft size={24} /> Back
+      </button>
       <div className="max-w-md w-full bg-card-bg p-8 rounded-xl border border-card-border shadow-2xl text-center relative overflow-hidden">
-        <button 
-          onClick={() => navigate('/')} 
-          className="absolute top-4 left-4 text-text-secondary hover:text-white transition flex items-center gap-1 text-sm font-medium z-20"
-        >
-          <ArrowLeft size={16} /> Back
-        </button>
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-red to-alert-red"></div>
         
         <h2 className="text-3xl font-bold mb-2 text-white">Enter Building</h2>
@@ -161,10 +191,10 @@ export default function QRScanner() {
                 </button>
                 <button 
                   type="submit"
-                  disabled={!manualCode.trim()}
+                  disabled={!manualCode.trim() || loading}
                   className="flex-[2] bg-alert-red disabled:opacity-50 disabled:cursor-not-allowed text-white py-2 rounded-lg font-bold hover:bg-red-600 transition"
                 >
-                  Access Building
+                  {loading ? 'Verifying...' : 'Access Building'}
                 </button>
               </div>
             </form>
