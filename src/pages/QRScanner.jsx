@@ -118,8 +118,8 @@ export default function QRScanner() {
       }
     } catch (err) {
       console.error("Verification failed", err);
-      // Fallback for demo if rules/indexing fail
-      navigate(`/onboarding/${code}`);
+      const toast = (await import('react-hot-toast')).default;
+      toast.error("Network error. Could not verify Building ID.");
     } finally {
       setLoading(false);
     }
