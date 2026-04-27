@@ -96,14 +96,14 @@ export default function QRScanner() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-dark-bg">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-dark-bg relative">
+      <button 
+        onClick={() => navigate('/')} 
+        className="absolute top-8 left-8 text-text-secondary hover:text-white transition flex items-center gap-2 text-lg font-semibold z-50"
+      >
+        <ArrowLeft size={24} /> Back
+      </button>
       <div className="max-w-md w-full bg-card-bg p-8 rounded-xl border border-card-border shadow-2xl text-center relative overflow-hidden">
-        <button 
-          onClick={() => navigate('/')} 
-          className="absolute top-4 left-4 text-text-secondary hover:text-white transition flex items-center gap-1 text-sm font-medium z-20"
-        >
-          <ArrowLeft size={16} /> Back
-        </button>
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-red to-alert-red"></div>
         
         <h2 className="text-3xl font-bold mb-2 text-white">Enter Building</h2>
