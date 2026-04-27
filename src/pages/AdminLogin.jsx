@@ -67,14 +67,14 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-dark-bg p-4 relative">
-      <button 
-        onClick={() => navigate('/')} 
-        className="absolute top-8 left-8 text-text-secondary hover:text-white transition flex items-center gap-2 text-lg font-semibold z-50"
-      >
-        <ArrowLeft size={24} /> Back
-      </button>
+    <div className="min-h-screen flex items-center justify-center bg-dark-bg p-4">
       <div className="max-w-md w-full bg-card-bg p-8 rounded-2xl border border-card-border shadow-2xl relative overflow-hidden">
+        <button 
+          onClick={() => navigate('/')} 
+          className="absolute top-4 left-4 text-text-secondary hover:text-white transition flex items-center gap-1 text-sm font-medium z-20"
+        >
+          <ArrowLeft size={16} /> Back
+        </button>
         <div className="flex justify-center mb-6 relative z-10">
           <ShieldAlert size={48} className="text-primary-red" />
         </div>
