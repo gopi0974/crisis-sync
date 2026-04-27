@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Html5Qrcode } from 'html5-qrcode';
 import { useNavigate } from 'react-router-dom';
 import { DEFAULT_BUILDING_ID } from '../utils/constants';
-import { Camera, RefreshCw } from 'lucide-react';
+import { Camera, RefreshCw, ArrowLeft } from 'lucide-react';
 
 export default function QRScanner() {
   const [scanResult, setScanResult] = useState(null);
@@ -98,6 +98,12 @@ export default function QRScanner() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-dark-bg">
       <div className="max-w-md w-full bg-card-bg p-8 rounded-xl border border-card-border shadow-2xl text-center relative overflow-hidden">
+        <button 
+          onClick={() => navigate('/')} 
+          className="absolute top-4 left-4 text-text-secondary hover:text-white transition flex items-center gap-1 text-sm font-medium z-20"
+        >
+          <ArrowLeft size={16} /> Back
+        </button>
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary-red to-alert-red"></div>
         
         <h2 className="text-3xl font-bold mb-2 text-white">Enter Building</h2>
