@@ -8,13 +8,13 @@ export const EMERGENCY_TYPES = [
 ];
 
 export const STAFF_PROFESSIONS = [
+  '👨‍⚕️ Doctor / Physician',
+  '👩‍⚕️ Nurse',
+  '🚑 Paramedic / EMT',
   '🔒 Security Guard',
-  '🏥 Medical / First Aid',
-  '🔥 Fire Safety Officer',
-  '🛎️ Floor Manager',
-  '⚙️ Maintenance',
-  '🍽️ Housekeeping',
-  '👔 Front Desk'
+  '⚙️ Facility / Maintenance',
+  '🧼 Sanitization / Housekeeping',
+  '📋 Ward Admin / Reception'
 ];
 
 export const DEFAULT_BUILDING_ID = "HOTEL_HYD_001";
