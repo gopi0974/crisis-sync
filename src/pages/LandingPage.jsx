@@ -25,7 +25,7 @@ export default function LandingPage() {
             Crisis Happens in <span className="text-alert-red">Seconds</span>.<br/>So Does CrisisSync.
           </h1>
           <p className="text-xl md:text-2xl text-text-secondary mb-10 max-w-3xl mx-auto">
-            A QR-based emergency coordination system that instantly bridges Hotel Guests, Staff, and First Responders.
+            A QR-based emergency coordination system that instantly bridges Hospitals, Patients, and Medical Staff.
           </p>
           <div className="flex gap-6 justify-center">
             <button 
