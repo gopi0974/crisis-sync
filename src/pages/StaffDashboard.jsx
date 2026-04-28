@@ -331,6 +331,22 @@ export default function StaffDashboard() {
       </section>
       )}
 
+      {/* Speed Dial */}
+      <section className="mb-8 border-t-2 border-dashed border-card-border pt-8">
+        <h3 className="text-lg font-bold mb-4">External Services Speed Dial</h3>
+        <div className="grid grid-cols-3 gap-4">
+          <a href="tel:101" className="bg-card-bg border border-card-border p-4 rounded-xl flex flex-col items-center hover:border-primary-red transition text-center">
+            <span className="text-3xl mb-1">🚒</span><h4 className="font-bold text-xs md:text-sm">Fire</h4><p className="text-primary-red font-black mt-1">101</p>
+          </a>
+          <a href="tel:108" className="bg-card-bg border border-card-border p-4 rounded-xl flex flex-col items-center hover:border-info transition text-center">
+            <span className="text-3xl mb-1">🚑</span><h4 className="font-bold text-xs md:text-sm">Ambulance</h4><p className="text-info font-black mt-1">108</p>
+          </a>
+          <a href="tel:100" className="bg-card-bg border border-card-border p-4 rounded-xl flex flex-col items-center hover:border-warning transition text-center">
+            <span className="text-3xl mb-1">🚔</span><h4 className="font-bold text-xs md:text-sm">Police</h4><p className="text-warning font-black mt-1">100</p>
+          </a>
+        </div>
+      </section>
+
     </div>
   );
 }
