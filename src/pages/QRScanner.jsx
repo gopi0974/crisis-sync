@@ -55,7 +55,13 @@ export default function QRScanner() {
         (result) => {
           setScanResult(result);
           stopScanning();
-          setTimeout(() => navigate(`/onboarding/${result || DEFAULT_BUILDING_ID}`), 1000);
+          
+          let parsedId = result;
+          if (result.includes('/onboarding/')) {
+            parsedId = result.split('/onboarding/')[1];
+          }
+          
+          setTimeout(() => navigate(`/onboarding/${parsedId || DEFAULT_BUILDING_ID}`), 1000);
         },
         (errorMessage) => {
           // ignore

@@ -481,7 +481,7 @@ export default function AdminDashboard() {
             
             <div className="bg-white p-8 rounded-2xl border-4 border-card-border shadow-2xl">
               <QRCodeSVG 
-                value={buildingId} 
+                value={`${window.location.origin}/onboarding/${buildingId}`} 
                 size={300} 
                 level={"H"}
                 fgColor={"#0D0D0D"}
