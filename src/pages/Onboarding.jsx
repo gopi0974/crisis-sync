@@ -141,7 +141,7 @@ export default function Onboarding() {
                 <label className="block text-sm text-text-secondary mb-1">Floor Assignment</label>
                 <select required value={floor} onChange={e => setFloor(e.target.value)} className="w-full bg-dark-bg border border-card-border rounded-lg p-3 text-white focus:outline-none focus:border-info">
                   <option value="">Select Floor</option>
-                  {[...Array(20)].map((_, i) => (
+                  {[...Array(10)].map((_, i) => (
                     <option key={i} value={`Floor ${i+1}`}>Floor {i+1}</option>
                   ))}
                   <option value="Ground/Lobby">Ground/Lobby</option>
