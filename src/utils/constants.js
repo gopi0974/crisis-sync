@@ -14,7 +14,8 @@ export const STAFF_PROFESSIONS = [
   '🔒 Security Guard',
   '⚙️ Facility / Maintenance',
   '🧼 Sanitization / Housekeeping',
-  '📋 Ward Admin / Reception'
+  '📋 Ward Admin / Reception',
+  '💊 Medical Store / Pharmacy'
 ];
 
 export const DEFAULT_BUILDING_ID = "HOTEL_HYD_001";
