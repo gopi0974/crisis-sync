@@ -35,6 +35,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/scan" element={<QRScanner />} />
           <Route path="/onboarding/:buildingId" element={<Onboarding />} />
+          <Route path="/onboarding/:buildingId/:roleParam" element={<Onboarding />} />
           <Route path="/guest" element={<GuestDashboard />} />
           <Route path="/staff" element={<StaffDashboard />} />
           

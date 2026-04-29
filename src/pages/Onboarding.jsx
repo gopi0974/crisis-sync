@@ -7,11 +7,11 @@ import { ref, set } from 'firebase/database';
 import { db } from '../firebase/config';
 
 export default function Onboarding() {
-  const { buildingId } = useParams();
+  const { buildingId, roleParam } = useParams();
   const navigate = useNavigate();
   const { setUser } = useAppContext();
   
-  const [role, setRole] = useState(null); // 'guest' | 'staff'
+  const [role, setRole] = useState(roleParam && ['guest', 'staff'].includes(roleParam) ? roleParam : null);
   const [loading, setLoading] = useState(false);
 
   // Form states
@@ -109,9 +109,11 @@ export default function Onboarding() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-dark-bg">
       <div className="max-w-md w-full bg-card-bg p-8 rounded-xl border border-card-border shadow-xl">
-        <button onClick={() => setRole(null)} className="text-text-secondary mb-6 hover:text-white text-sm">
-          ← Back to roles
-        </button>
+        {!roleParam && (
+          <button onClick={() => setRole(null)} className="text-text-secondary mb-6 hover:text-white text-sm">
+            ← Back to roles
+          </button>
+        )}
         <h2 className="text-2xl font-bold mb-6 text-white flex items-center gap-2">
           {role === 'guest' ? '🛌 Patient/Visitor Entry' : '🧑‍⚕️ Staff Registration'}
         </h2>

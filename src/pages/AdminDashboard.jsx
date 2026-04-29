@@ -476,20 +476,38 @@ export default function AdminDashboard() {
         {/* TAB 6: QR CODE */}
         {activeTab === 'QR_CODE' && (
           <div className="space-y-6 flex flex-col items-center justify-center text-center py-12">
-            <h2 className="text-3xl font-bold mb-2">Venue Entry QR Code</h2>
-            <p className="text-text-secondary mb-8">Print and place this QR code at your building entrances for Guests and Staff to scan.</p>
+            <h2 className="text-3xl font-bold mb-2">Venue Entry QR Codes</h2>
+            <p className="text-text-secondary mb-8">Print and place these QR codes at your building entrances. One for Patients, one for Staff.</p>
             
-            <div className="bg-white p-8 rounded-2xl border-4 border-card-border shadow-2xl">
-              <QRCodeSVG 
-                value={`${window.location.origin}/onboarding/${buildingId}`} 
-                size={300} 
-                level={"H"}
-                fgColor={"#0D0D0D"}
-                bgColor={"#FFFFFF"}
-              />
+            <div className="grid md:grid-cols-2 gap-12">
+              <div className="flex flex-col items-center">
+                <h3 className="text-xl font-bold mb-4 text-white">🛌 Patient / Visitor QR</h3>
+                <div className="bg-white p-6 rounded-2xl border-4 border-card-border shadow-2xl">
+                  <QRCodeSVG 
+                    value={`${window.location.origin}/onboarding/${buildingId}/guest`} 
+                    size={220} 
+                    level={"H"}
+                    fgColor={"#0D0D0D"}
+                    bgColor={"#FFFFFF"}
+                  />
+                </div>
+              </div>
+              
+              <div className="flex flex-col items-center">
+                <h3 className="text-xl font-bold mb-4 text-info">🧑‍⚕️ Medical Staff QR</h3>
+                <div className="bg-white p-6 rounded-2xl border-4 border-info shadow-2xl">
+                  <QRCodeSVG 
+                    value={`${window.location.origin}/onboarding/${buildingId}/staff`} 
+                    size={220} 
+                    level={"H"}
+                    fgColor={"#0D0D0D"}
+                    bgColor={"#FFFFFF"}
+                  />
+                </div>
+              </div>
             </div>
             
-            <p className="mt-6 text-sm text-text-secondary bg-card-bg px-6 py-3 rounded-lg border border-card-border">
+            <p className="mt-8 text-sm text-text-secondary bg-card-bg px-6 py-3 rounded-lg border border-card-border">
               Embedded Building ID: <span className="font-bold text-white">{buildingId}</span>
             </p>
           </div>
